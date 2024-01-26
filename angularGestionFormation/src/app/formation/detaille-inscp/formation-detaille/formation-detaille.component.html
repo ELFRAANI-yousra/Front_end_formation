@@ -1,0 +1,33 @@
+
+
+<!-- app.component.html -->
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+     <!-- formation-details.component.html -->
+     <app-individu-inscreption></app-individu-inscreption>
+    </div>
+    <div class="col-md-6">
+      <!-- Right Column - IndividuInscreptionComponent -->
+     <br>
+     <br>
+      <div *ngIf="selectedFormation" class="card">
+        <div class="card-header">
+          <h5 class="card-title">{{ selectedFormation.titre }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Category: {{ selectedFormation.categorie }}</h6>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><strong>Price:</strong> {{ selectedFormation.cout }} dh</p>
+          <p class="card-text"><strong>Duration:</strong> {{ selectedFormation.nombreHeures }} hours</p>
+          <p class="card-text"><strong>Objectifs:</strong> {{ selectedFormation.objectifs }}</p>
+          <p class="card-text"><strong>Programme Detaille:</strong> {{ selectedFormation.programmeDetaille }}</p>
+          <!-- Add more details as needed -->
+        </div>
+        <div class="card-footer">
+          <a routerLink="" class="card-link">Back to List</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

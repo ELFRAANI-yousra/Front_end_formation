@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-16">
+        <div class="card" style="margin: 10px;">
+          <div class="card-body">
+            <!-- Utilisez la classe form-check-inline pour aligner les cases à cocher horizontalement -->
+           
+                <div *ngFor="let card of categories" class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      [id]="card"
+                      (change)="onCheckboxChange(card)"
+                      [checked]="selectedCategories.includes(card)"
+                    />
+                    <label class="form-check-label" [for]="card">{{ card }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-16">
+        <div class="card" style="margin: 10px;">
+          <div class="card-body">
+            <label for="customRange1" class="form-label">cout range</label>
+            <input type="range" class="form-range" id="customRange1" min="0" max="10000" [(ngModel)]="coutRangeValue" (input)="onCoutRangeChange($event)">
+            <p>Cout Range Value: {{ coutRangeValue }} dh</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-16">
+        <div class="card" style="margin: 10px;">
+          <div class="card-body">
+            <label for="customRange2" class="form-label">Nombre d'heure range</label>
+            <input type="range" class="form-range" id="customRange2" min="0" max="50" [(ngModel)]="nombreRangeValue" (input)="onNombreRangeChange($event)">
+            <p>Nombre d'heure Range Value: {{ nombreRangeValue }} h</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+ 
+  
+  
+       
+     
+         
+              
+          
+             

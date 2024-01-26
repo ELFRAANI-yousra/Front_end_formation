@@ -1,0 +1,14 @@
+<ul class="nav">
+  <li class="nav-item" (click)="setActiveMenuItem('Home')">
+    <a class="nav-link" [class.active]="activeMenuItem === 'Home'" href="">Home</a>
+  </li>
+  <li class="nav-item" (click)="setActiveMenuItem('About')">
+    <a class="nav-link" [class.active]="activeMenuItem === 'About'" href="#">About</a>
+  </li>
+  <li class="nav-item" (click)="setActiveMenuItem('Postuler')">
+    <a class="nav-link" [class.active]="activeMenuItem === 'Postuler'" href="/FourmateurExterne">Postuler</a>
+  </li>
+  <li class="nav-item" (click)="setActiveMenuItem('Inscrire')">
+    <a class="nav-link" [class.active]="activeMenuItem === 'Inscrire'" href="#">S'inscrire</a>
+  </li>
+</ul>
