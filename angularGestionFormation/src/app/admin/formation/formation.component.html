@@ -1,0 +1,199 @@
+<div class="container mt-5">
+  <button class="btn btn-primary float-right mb-3" (click)="open(content)">Add Formation</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Category</th>
+          <th>Cost</th>
+          <th>Hours</th>
+          <th>Objectives</th>
+          <th>Detailed Program</th>
+          <th>Title</th>
+          <th>Subscribed Individuals</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let formation of formations">
+          <td>{{ formation.id }}</td>
+          <td>{{ formation.categorie }}</td>
+          <td>{{ formation.cout }}</td>
+          <td>{{ formation.nombreHeures }}</td>
+          <td>{{ formation.objectifs }}</td>
+          <td>{{ formation.programmeDetaille }}</td>
+          <td>{{ formation.titre }}</td>
+          <td>{{ formation.individuCount }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteFormation(formation.id)">Delete</button>
+            <button class="btn btn-primary" (click)="selectFormationForEdit(formation); open(editContent)">Edit</button>
+            <button class="btn btn-success" (click)="selectFormationForEdit(formation);open(ScheduleContent)">Schedule</button>
+            <button class="btn btn-info" (click)="seePlanifications(formation.id)">View Schedules</button>
+            <button class="btn btn-info" (click)="selectFormationForEdit(formation)">Individuals</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Bootstrap Modal for adding formation -->
+<ng-template #content let-modal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addFormationModalLabel">Add Formation</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form for adding a new formation -->
+        <form #addFormationForm="ngForm" (ngSubmit)="addFormation(addFormationForm)">
+          <!-- Form fields -->
+          <div class="form-group">
+            <label for="categorie">Categorie</label>
+            <input type="text" class="form-control" id="categorie" name="categorie" [(ngModel)]="newFormation.categorie" required>
+          </div>
+          <div class="form-group">
+            <label for="titre">Titre</label>
+            <input type="text" class="form-control" id="titre" name="titre" [(ngModel)]="newFormation.titre" required>
+          </div>
+          <div class="form-group">
+            <label for="nombreHeures">Nombre d'heures</label>
+            <input type="number" class="form-control" id="nombreHeures" name="nombreHeures" [(ngModel)]="newFormation.nombreHeures" required>
+          </div>
+          <div class="form-group">
+            <label for="cout">Cout</label>
+            <input type="number" class="form-control" id="cout" name="cout" [(ngModel)]="newFormation.cout" required>
+          </div>
+          <div class="form-group">
+            <label for="objectifs">Objectifs</label>
+            <textarea class="form-control" id="objectifs" name="objectifs" [(ngModel)]="newFormation.objectifs" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="programmeDetaille">Programme Detaille</label>
+            <textarea class="form-control" id="programmeDetaille" name="programmeDetaille" [(ngModel)]="newFormation.programmeDetaille" required></textarea>
+          </div>
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Add</button>
+        </form>
+      </div>
+    </div>
+</ng-template>
+
+
+<ng-template #editContent let-modal>
+  <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="editFormationModalLabel">Edit Formation</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+          <!-- Form for editing an existing formation -->
+          <form #editFormationForm="ngForm" (ngSubmit)="editFormation(editFormationForm)">
+              <!-- Hidden input for formation ID -->
+              <input type="hidden" id="editFormationId" name="id" [(ngModel)]="selectedFormation.id">
+              <!-- Form fields -->
+              <div class="form-group">
+                  <label for="editCategorie">Categorie</label>
+                  <input type="text" class="form-control" id="editCategorie" name="categorie" [(ngModel)]="selectedFormation.categorie" required>
+              </div>
+              <div class="form-group">
+                  <label for="editTitre">Titre</label>
+                  <input type="text" class="form-control" id="editTitre" name="titre" [(ngModel)]="selectedFormation.titre" required>
+              </div>
+              <div class="form-group">
+                  <label for="editNombreHeures">Nombre d'heures</label>
+                  <input type="number" class="form-control" id="editNombreHeures" name="nombreHeures" [(ngModel)]="selectedFormation.nombreHeures" required>
+              </div>
+              <div class="form-group">
+                  <label for="editCout">Cout</label>
+                  <input type="number" class="form-control" id="editCout" name="cout" [(ngModel)]="selectedFormation.cout" required>
+              </div>
+              <div class="form-group">
+                  <label for="editObjectifs">Objectifs</label>
+                  <textarea class="form-control" id="editObjectifs" name="objectifs" [(ngModel)]="selectedFormation.objectifs" required></textarea>
+              </div>
+              <div class="form-group">
+                  <label for="editProgrammeDetaille">Programme Detaille</label>
+                  <textarea class="form-control" id="editProgrammeDetaille" name="programmeDetaille" [(ngModel)]="selectedFormation.programmeDetaille" required></textarea>
+              </div>
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+      </div>
+  </div>
+</ng-template>
+
+
+
+<ng-template #ScheduleContent let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="editFormationModalLabel">Edit Formation</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <!-- Form for editing an existing formation -->
+      <form #ScheduleForm="ngForm" (ngSubmit)="SchedulFormation(ScheduleForm)">
+          <!-- Hidden input for formation ID -->
+          <input type="hidden" id="editFormationId" name="id" [(ngModel)]="selectedFormation.id">
+          <!-- Form fields -->
+          <div class="form-group">
+            <label for="formateur">Former</label>
+            <mat-form-field appearance="fill">
+              <mat-label>Former</mat-label>
+              <mat-select [(value)]="selectedformateur">
+                <mat-option *ngFor="let formateur of formateurs" [value]="formateur.id" >{{formateur.nom}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <label for="entreprises">entreprises</label>
+            <mat-form-field appearance="fill">
+              <mat-label>entreprises</mat-label>
+              <mat-select [(value)]="selectedentreprise">
+                <mat-option *ngFor="let entreprise of entreprises" [value]="entreprise.id"  >{{entreprise.nom}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <label for="ville">City</label>
+            <input type="text" class="form-control" id="ville" name="ville" [(ngModel)]="ville" required>
+        </div>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="addEvent($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <div *ngIf="selectedDates.length > 0">
+          <h4>Selected Dates:</h4>
+          <ul>
+            <li *ngFor="let date of selectedDates">
+              {{ date | date }}
+              <button mat-button color="warn" (click)="removeDate(date)">Remove</button>
+            </li>
+          </ul>
+        </div>
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+  </div>
+
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

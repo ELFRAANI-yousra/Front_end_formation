@@ -10,7 +10,7 @@ import { FormationDetailServiceService } from './formation-detail.service.servic
   styleUrls: ['./liste-formation.component.css']
 })
 export class ListeFormationComponent implements OnInit {
-  backendUrl = "http://localhost:8080/formation";
+  backendUrl = "http://localhost:8080/accueil";
   formations: any;
   lastSelectedCategories: string[] = [];
 

@@ -5,12 +5,23 @@ import{FormationComponent} from './formation/formation.component'
 import{DetailleInscpComponent} from './formation/detaille-inscp/detaille-inscp.component'
 import{IndividuInscreptionComponent}from './formation/individu-inscreption/individu-inscreption.component'
 import{FourmateurExterneComponent}from './formation/fourmateur-externe/fourmateur-externe.component'
+import{LoginComponent}from './login/login.component'
+import{FormateurComponent}from './formateur/formateur.component'
+import{FormationComponent as FormationComponentAdmin}from './admin/formation/formation.component' 
+import{AddmodalComponent}from './admin/formation/addmodal/addmodal.component' 
 const routes: Routes = [
-  {path: 'formation-detaille', component: FormationDetailleComponent},
+{path: 'formation-detaille', component: FormationDetailleComponent},
 {path: 'individu', component: IndividuInscreptionComponent},
 {path: '', component: FormationComponent},
 {path: 'individuDetail', component: DetailleInscpComponent},
-{path: 'FourmateurExterne', component: FourmateurExterneComponent}
+{path: 'FourmateurExterne', component: FourmateurExterneComponent},
+{path: 'login', component: LoginComponent},
+{path: 'formateur', component: FormateurComponent},
+{path: 'admin/formation', component: FormationComponentAdmin},
+{path: 'test', component: AddmodalComponent}
+
+
+
 ];
 
 @NgModule({

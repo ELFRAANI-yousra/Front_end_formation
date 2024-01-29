@@ -15,7 +15,7 @@ export class IndividuInscreptionComponent {
     this.selectedFormation = this.formationDetailServiceService.getSelectedFormation();
   }
 
-  backEndURL = "http://localhost:8080/individu";
+  backEndURL = "http://localhost:8080/rejoindre";
 
   formIndividu = this.fb.group({
     nom: [],

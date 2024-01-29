@@ -1,0 +1,20 @@
+<div class="container mt-5">
+    <div class="card-deck">
+      <div class="card" *ngFor="let formation of formations">
+        <div class="card-body">
+          <h5 class="card-title">{{ formation.formation.titre }}</h5>
+          <p class="card-text">Nombre d'heures: {{ formation.formation.nombreHeures }}</p>
+          <p class="card-text">Objectifs: {{ formation.formation.objectifs }}</p>
+          <p class="card-text">Programme détaillé: {{ formation.formation.programmeDetaille }}</p>
+          <p class="card-text">categorie: {{ formation.formation.categorie }}</p>
+          <p class="card-text">Ville: {{ formation.ville }}</p>
+          <p class="card-text">Dates :</p>
+          <div *ngFor="let date of formation.dates">
+            <p class="card-text">{{ date.date }}</p>
+          </div>
+          <p class="card-text"><small class="text-muted">{{ formation.date }}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
