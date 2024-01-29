@@ -1,0 +1,53 @@
+<div *ngIf="individu">
+    <div class="container mt-3">
+        <!-- Rating Cards using Angular -->
+        <div class="row justify-content-center">
+            <div class="jumbotron mt-3"class="col-md-4 mb-4">
+                <h2>Bienvenue {{ individu.nom }} {{ individu.prenom }}</h2>
+                <p >Nous espérons que vous passerez une excellente formation chez nous,</p>
+                <p >Vous pouvez évaluer votre expérience chez nous en remplissant le formulaire ci-dessous</p>
+                
+              </div>
+             
+            <!-- Rating Card for Pedagogical Note -->
+            <div class="col-md-4 mb-4"> 
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Formation Rate</h5>
+
+                        <div class="form-group">
+                            <label for="rating1">Pedagogical Note : </label>
+                            <span *ngFor="let star of stars; let i = index" (click)="setRating(i + 1, 'PedagogicalNote')">
+                                {{ i < PedagogicalNote ? '★' : '☆' }}
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating2">Note Rythme : </label>
+                            <span *ngFor="let star of stars; let i = index" (click)="setRating(i + 1, 'NoteRythme')">
+                                {{ i < NoteRythme ? '★' : '☆' }}
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating3">Note Support Cours/TP : </label>
+                            <span *ngFor="let star of stars; let i = index" (click)="setRating(i + 1, 'NoteSupport')">
+                                {{ i < NoteSupport ? '★' : '☆' }}
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating4">Note Maitrise Sujet : </label>
+                            <span *ngFor="let star of stars; let i = index" (click)="setRating(i + 1, 'NoteMaitrise')">
+                                {{ i < NoteMaitrise ? '★' : '☆' }}
+                            </span>
+                        </div>
+
+                        <br>
+                        <button class="btn btn-primary" (click)="captureRatings()">Submit Ratings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

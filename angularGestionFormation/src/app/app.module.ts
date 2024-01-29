@@ -11,6 +11,7 @@ import { CategoriesMenuComponent } from './formation/categories-menu/categories-
 import{HttpClientModule} from '@angular/common/http';
 import { IndividuInscreptionComponent } from './formation/individu-inscreption/individu-inscreption.component';
 import { FourmateurExterneComponent } from './formation/fourmateur-externe/fourmateur-externe.component';
+<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
 import { FormateurComponent } from './formateur/formateur.component';
 import { AdminComponent } from './admin/admin.component'
@@ -31,6 +32,10 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-mat
 
 
 
+=======
+import { EvaluationComponent } from './formation/evaluation/evaluation.component';
+import { AccesEvaluationComponent } from './formation/acces-evaluation/acces-evaluation.component';
+>>>>>>> 9ed73c52a0c50f9e30d0863597e552777702a00a
 
 @NgModule({
   declarations: [
@@ -42,12 +47,20 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-mat
     IndividuInscreptionComponent,
     FormationDetailleComponent,
     FourmateurExterneComponent,
+<<<<<<< HEAD
     LoginComponent,
     FormateurComponent,
     AdminComponent,
     FormationComponentADmin,
     AddmodalComponent,
   
+=======
+    EvaluationComponent,
+    AccesEvaluationComponent,
+    
+
+
+>>>>>>> 9ed73c52a0c50f9e30d0863597e552777702a00a
   ],
   imports: [
     FormsModule,
@@ -55,6 +68,7 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-mat
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+<<<<<<< HEAD
     NgbModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
@@ -67,6 +81,9 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-mat
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
      
+=======
+   
+>>>>>>> 9ed73c52a0c50f9e30d0863597e552777702a00a
   ],
   providers: [],
   bootstrap: [AppComponent]
