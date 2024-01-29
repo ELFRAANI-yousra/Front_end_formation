@@ -11,7 +11,7 @@ export class FourmateurExterneComponent {
   constructor(private fb: FormBuilder, private http: HttpClient) {
   }
 
-  backEndURL = "http://localhost:8080/formateurExterne";
+  backEndURL = "http://localhost:8080/postuler";
 
   formFormateurExterne = this.fb.group({
     nom: [],

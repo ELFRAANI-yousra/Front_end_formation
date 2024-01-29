@@ -4,14 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormationDetailleComponent } from './formation/detaille-inscp/formation-detaille/formation-detaille.component';
-
 import { FormationComponent } from './formation/formation.component';
 import { MenuComponent } from './formation/menu/menu.component';
 import { ListeFormationComponent } from './formation/liste-formation/liste-formation.component';
 import { CategoriesMenuComponent } from './formation/categories-menu/categories-menu.component';
 import{HttpClientModule} from '@angular/common/http';
 import { IndividuInscreptionComponent } from './formation/individu-inscreption/individu-inscreption.component';
-import { FourmateurExterneComponent } from './formation/fourmateur-externe/fourmateur-externe.component'
+import { FourmateurExterneComponent } from './formation/fourmateur-externe/fourmateur-externe.component';
+import { EvaluationComponent } from './formation/evaluation/evaluation.component';
+import { AccesEvaluationComponent } from './formation/acces-evaluation/acces-evaluation.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { FourmateurExterneComponent } from './formation/fourmateur-externe/fourm
     IndividuInscreptionComponent,
     FormationDetailleComponent,
     FourmateurExterneComponent,
+    EvaluationComponent,
+    AccesEvaluationComponent,
     
 
 
@@ -32,7 +35,8 @@ import { FourmateurExterneComponent } from './formation/fourmateur-externe/fourm
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,14 @@
 :host {
     display: block;
-    width: 85%;
+    width: 80%;
     float: left;
     padding: 10px; /* Add padding as needed */
   }
+  /* styles.css */
+.card {
+  background-color: rgb(245, 245, 245);
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
   

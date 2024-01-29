@@ -1,0 +1,12 @@
+span {
+    font-size: 24px; /* Adjust the font size to make stars larger */
+    color: gold; /* Change the color of the stars */
+    cursor: pointer; /* Add cursor pointer for a clickable feel */
+  }
+  
+  /* Add some spacing between stars for better visibility */
+  span + span {
+    margin-left: 5px;
+  }
+
+  

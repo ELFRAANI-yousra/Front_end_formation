@@ -8,7 +8,7 @@ import { SharedDataService } from '../../shared-data.service';
   styleUrls: ['./categories-menu.component.css']
 })
 export class CategoriesMenuComponent {
-  backendUrl = "http://localhost:8080/formation/categories";
+  backendUrl = "http://localhost:8080/accueil/categories";
   categories: any;
   selectedCategories: string[] = [];
 
