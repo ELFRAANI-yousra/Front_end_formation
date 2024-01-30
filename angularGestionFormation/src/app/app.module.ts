@@ -11,7 +11,6 @@ import { CategoriesMenuComponent } from './formation/categories-menu/categories-
 import{HttpClientModule} from '@angular/common/http';
 import { IndividuInscreptionComponent } from './formation/individu-inscreption/individu-inscreption.component';
 import { FourmateurExterneComponent } from './formation/fourmateur-externe/fourmateur-externe.component';
-<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
 import { FormateurComponent } from './formateur/formateur.component';
 import { AdminComponent } from './admin/admin.component'
@@ -26,16 +25,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
-
-
-
-
-
-
-=======
+import{AccesEvaluationComponent} from './formation/acces-evaluation/acces-evaluation.component'
 import { EvaluationComponent } from './formation/evaluation/evaluation.component';
-import { AccesEvaluationComponent } from './formation/acces-evaluation/acces-evaluation.component';
->>>>>>> 9ed73c52a0c50f9e30d0863597e552777702a00a
+import { EntrepriseComponent } from './admin/entreprise/entreprise.component';
+import { FourmateurComponent } from './admin/fourmateur/fourmateur.component';
+import { AssistantComponent } from './admin/assistant/assistant.component';
+import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
 
 @NgModule({
   declarations: [
@@ -47,20 +42,18 @@ import { AccesEvaluationComponent } from './formation/acces-evaluation/acces-eva
     IndividuInscreptionComponent,
     FormationDetailleComponent,
     FourmateurExterneComponent,
-<<<<<<< HEAD
     LoginComponent,
     FormateurComponent,
     AdminComponent,
     FormationComponentADmin,
     AddmodalComponent,
-  
-=======
-    EvaluationComponent,
     AccesEvaluationComponent,
-    
-
-
->>>>>>> 9ed73c52a0c50f9e30d0863597e552777702a00a
+    EvaluationComponent,
+    EntrepriseComponent,
+    FourmateurComponent,
+    AssistantComponent,
+    MenuAdminComponent
+  
   ],
   imports: [
     FormsModule,
@@ -68,7 +61,6 @@ import { AccesEvaluationComponent } from './formation/acces-evaluation/acces-eva
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-<<<<<<< HEAD
     NgbModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
@@ -81,9 +73,6 @@ import { AccesEvaluationComponent } from './formation/acces-evaluation/acces-eva
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
      
-=======
-   
->>>>>>> 9ed73c52a0c50f9e30d0863597e552777702a00a
   ],
   providers: [],
   bootstrap: [AppComponent]

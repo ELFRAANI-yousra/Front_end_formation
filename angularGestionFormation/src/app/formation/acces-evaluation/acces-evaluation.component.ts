@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 import { EvaluationServiceService } from './evaluation-service.service';
 import { Router } from '@angular/router';
 @Component({
@@ -10,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class AccesEvaluationComponent {
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private evaluationServiceService: EvaluationServiceService) { }
-
   individu: any;
   url = "http://localhost:8080/evaluer/";
 
