@@ -1,0 +1,122 @@
+<div class="container mt-5">
+    <button class="btn btn-primary float-right mb-3" (click)="open(content)">Add Formateur</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Email</th>
+          <th>Mots de pass</th>
+          <th>Mots Cles</th>
+          <th>Remarques</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fourmateur of fourmateurs">
+          <td>{{ fourmateur.id }}</td>
+          <td>{{ fourmateur.nom }}</td>
+          <td>{{ fourmateur.prenom }}</td>
+          <td>{{ fourmateur.email }}</td>
+          <td>{{ fourmateur.motDePasse }}</td>
+          <td>{{ fourmateur.motsCles }}</td>
+          <td>{{ fourmateur.remarques }}</td>
+  
+          <td>
+            <button class="btn btn-danger" (click)="deleteFourmateur(fourmateur.id)">Delete</button>
+            
+            <button class="btn btn-primary" (click)="selectFourmateurForEdit(fourmateur); open(editContent)">Edit</button>
+           
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addFourmateurModalLabel">Add Formateur</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form for adding a new formation -->
+        <form  #addFourmateurForm="ngForm" (ngSubmit)="addFourmateur(addFourmateurForm)" >
+          <!-- Form fields -->
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="newFourmateur.nom" required>
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prenom</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="newFourmateur.prenom" required>
+          </div>
+          <div class="form-group">
+            <label for="email">email</label>
+            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="newFourmateur.email" required>
+          </div>
+          <div class="form-group">
+            <label for="motsDePasse">motsDePasse</label>
+            <input type="text" class="form-control" id="motsDePasse" name="motsDePasse" [(ngModel)]="newFourmateur.motDePasse" required>
+          </div>
+          <div class="form-group">
+            <label for="motsCles">motsCles</label>
+            <textarea class="form-control" id="motsCles" name="motsCles" [(ngModel)]="newFourmateur.motsCles" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="remarques">remarques</label>
+            <textarea class="form-control" id="remarques" name="remarques" [(ngModel)]="newFourmateur.remarques" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Add</button>
+        </form>
+      </div>
+    </div>
+</ng-template>
+
+
+
+<ng-template #editContent let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="editFourmateurModalLabel">Edit Formateur</h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <!-- Form for editing an existing formation -->
+            <form #editFourmateurForm="ngForm" (ngSubmit)="editFourmateur(editFourmateurForm)">
+                <!-- Hidden input for formation ID -->
+                <input type="hidden" id="editFourmateurId" name="id" [(ngModel)]="selectedFourmateur.id">
+                <!-- Form fields -->
+                <div class="form-group">
+                    <label for="editNon">Nom</label>
+                    <input type="text" class="form-control" id="editNom" name="nom" [(ngModel)]="selectedFourmateur.nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">prenom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="selectedFourmateur.prenom" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">email</label>
+                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="selectedFourmateur.email" required>
+                </div>
+                <div class="form-group">
+                    <label for="motsDePasse">motsDePasse</label>
+                    <input type="text" class="form-control" id="motsDePasse" name="motsDePasse" [(ngModel)]="selectedFourmateur.motDePasse" required>
+                </div>
+                <div class="form-group">
+                    <label for="motsCles">motsCles</label>
+                    <textarea class="form-control" id="motsCles" name="motsCles" [(ngModel)]="selectedFourmateur.motsCles" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="remarques">remarques</label>
+                    <textarea class="form-control" id="remarques" name="remarques" [(ngModel)]="selectedFourmateur.remarques" required></textarea>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+  </ng-template>
+  
+  

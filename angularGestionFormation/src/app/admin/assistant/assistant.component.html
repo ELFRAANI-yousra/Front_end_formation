@@ -1,0 +1,123 @@
+<div class="container mt-5">
+    <button class="btn btn-primary float-right mb-3" (click)="open(content)">Add Assistant</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Email</th>
+          <th>Mots de pass</th>
+          <th>adresse</th>
+          <th>telephone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let assistant of assistants">
+          <td>{{ assistant.id }}</td>
+          <td>{{ assistant.nom }}</td>
+          <td>{{ assistant.prenom }}</td>
+          <td>{{ assistant.nomUtilisateur }}</td>
+          <td>{{ assistant.motDePasse }}</td>
+          <td>{{ assistant.adresse }}</td>
+          <td>{{ assistant.telephone }}</td>
+  
+          <td>
+            <button class="btn btn-danger" (click)="deleteAssistant(assistant.id)">Delete</button>
+            
+            <button class="btn btn-primary" (click)="selectAssistantForEdit(assistant); open(editContent)">Edit</button>
+           
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAssistantModalLabel">Add Assistant</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form for adding a new formation -->
+        <form  #addAssistantForm="ngForm" (ngSubmit)="addAssistant(addAssistantForm)" >
+          <!-- Form fields -->
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="newAssistant.nom" required>
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prenom</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="newAssistant.prenom" required>
+          </div>
+          <div class="form-group">
+            <label for="nomUtilisateur">nomUtilisateur</label>
+            <input type="text" class="form-control" id="nomUtilisateur" name="nomUtilisateur" [(ngModel)]="newAssistant.nomUtilisateur" required>
+          </div>
+          <div class="form-group">
+            <label for="motDePasse">motsDePasse</label>
+            <input type="text" class="form-control" id="motDePasse" name="motDePasse" [(ngModel)]="newAssistant.motDePasse" required>
+          </div>
+          <div class="form-group">
+            <label for="adresse">adresse</label>
+            <textarea class="form-control" id="adresse" name="adresse" [(ngModel)]="newAssistant.adresse" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="telephone">telephone</label>
+            <input type="text" class="form-control" id="telephone" name="telephone" [(ngModel)]="newAssistant.telephone" required>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Add</button>
+        </form>
+      </div>
+    </div>
+</ng-template>
+
+
+
+<ng-template #editContent let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="editAssistantModalLabel">Edit Assistant</h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <!-- Form for editing an existing formation -->
+            <form #editAssistantForm="ngForm" (ngSubmit)="editAssistant(editAssistantForm)">
+                <!-- Hidden input for formation ID -->
+                <input type="hidden" id="editAssistantId" name="id" [(ngModel)]="selectedAssistant.id">
+                <!-- Form fields -->
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="selectedAssistant.nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">prenom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="selectedAssistant.prenom" required>
+                </div>
+                <div class="form-group">
+                    <label for="nomUtilisateur">nomUtilisateur</label>
+                    <input type="text" class="form-control" id="nomUtilisateur" name="nomUtilisateur" [(ngModel)]="selectedAssistant.nomUtilisateur" required>
+                </div>
+                <div class="form-group">
+                    <label for="motsDePasse">motDePasse</label>
+                    <input type="text" class="form-control" id="motDePasse" name="motDePasse" [(ngModel)]="selectedAssistant.motDePasse" required>
+                </div>
+                <div class="form-group">
+                    <label for="adresse">adresse</label>
+                    <textarea class="form-control" id="adresse" name="adresse" [(ngModel)]="selectedAssistant.adresse" required></textarea>
+                </div>
+            
+                <div class="form-group">
+                    <label for="telephone">telephone</label>
+                    <input type="tel" class="form-control" id="telephone" name="telephone" [(ngModel)]="selectedAssistant.telephone" required>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+  </ng-template>
+  
+  

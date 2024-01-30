@@ -15,7 +15,11 @@ export class FormationDetailleComponent implements OnInit {
   myForm=this.fb.group({
     code: []  
   });
-
+ onSubmit() {
+     const aa=this.myForm.get('code');
+      console.log('Value submitted:',aa);
+   
+  }
   ngOnInit() {
     // Retrieve the selected formation from the service
     this.selectedFormation = this.formationDetailServiceService.getSelectedFormation();
@@ -24,9 +28,5 @@ export class FormationDetailleComponent implements OnInit {
 
  
 
-  onSubmit() {
-     const aa=this.myForm.get('code');
-      console.log('Value submitted:',aa);
-   
-  }
+ 
 }

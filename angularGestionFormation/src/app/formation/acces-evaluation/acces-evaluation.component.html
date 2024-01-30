@@ -1,14 +1,14 @@
 <div  class="card">
-    <div class="card-header">
-      <h5 class="card-title">Evalusation du formation</h5>
+  <div class="card-header">
+    <h5 class="card-title">Evalusation du formation</h5>
+  </div>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="card-body">
+      <p class="card-text"><strong>entrez votre code :</strong></p>
+      <input formControlName="code" type="text" class="form-control" id="code" name="code" required>
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-      <div class="card-body">
-        <p class="card-text"><strong>entrez votre code :</strong></p>
-        <input formControlName="code" type="text" class="form-control" id="code" name="code" required>
-        <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
-    
+  </form>
+  
 </div>

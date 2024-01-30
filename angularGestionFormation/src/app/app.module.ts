@@ -25,6 +25,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+<<<<<<< HEAD
 import { AccesEvaluationComponent } from './formation/acces-evaluation/acces-evaluation.component';
 import { EvaluationComponent } from './formation/evaluation/evaluation.component';
 import { PlanificationComponent } from './admin/planification/planification.component';
@@ -34,6 +35,14 @@ import { PlanificationComponent } from './admin/planification/planification.comp
 
 
 
+=======
+import{AccesEvaluationComponent} from './formation/acces-evaluation/acces-evaluation.component'
+import { EvaluationComponent } from './formation/evaluation/evaluation.component';
+import { EntrepriseComponent } from './admin/entreprise/entreprise.component';
+import { FourmateurComponent } from './admin/fourmateur/fourmateur.component';
+import { AssistantComponent } from './admin/assistant/assistant.component';
+import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
+>>>>>>> bbd9416058158d37f6a69267feae56b811feacd3
 
 @NgModule({
   declarations: [
@@ -52,7 +61,15 @@ import { PlanificationComponent } from './admin/planification/planification.comp
     AddmodalComponent,
     AccesEvaluationComponent,
     EvaluationComponent,
+<<<<<<< HEAD
     PlanificationComponent
+=======
+    EntrepriseComponent,
+    FourmateurComponent,
+    AssistantComponent,
+    MenuAdminComponent
+  
+>>>>>>> bbd9416058158d37f6a69267feae56b811feacd3
   ],
   imports: [
     FormsModule,
