@@ -24,6 +24,15 @@ export class FormationComponent
     objectifs: '',
     programmeDetaille: ''
   };
+
+  newIndividu: any = {
+      nom:'',
+      prenom:'',
+      dateNaissance:'',
+      ville:'',
+      email:'',
+      telephone:'',
+  }
  
   private Url = 'http://localhost:8080/formation';
   private modalService = inject(NgbModal);
@@ -32,6 +41,8 @@ export class FormationComponent
   selectedFormation: any = {};
   selectedformateur:any={};
   selectedentreprise:any={};
+  selectedIndividual:any={};
+  selectedIndividuals: any[] = [];
   ville:string = "";
   planificationId: number=0;
   selectedDates: Date[] = [];
@@ -105,13 +116,16 @@ export class FormationComponent
               console.error('Error fetching individus for formation:', error);
             }
           );
+
         });
+        
       },
       (error: HttpErrorResponse) => {  // Define the type of 'error' as 'HttpErrorResponse'
         console.error('Error fetching formations:', error);
       }
     );
   }
+
 
 
   fetchIndividu(formationId: number): any {
@@ -169,7 +183,18 @@ export class FormationComponent
     }
 
     open(content: TemplateRef<any>) {
-      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      this.modalService.open(content,).result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        },
+      );
+    }
+
+    openXl(content: TemplateRef<any>) {
+      this.modalService.open(content, { size: 'xl' ,scrollable: true }).result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
         },
@@ -193,6 +218,10 @@ export class FormationComponent
     selectFormationForEdit(formation: any): void {
       this.selectedFormation = formation;
       console.log(formation.individus)
+    }
+
+    selectIndividual(individu: any): void {
+      this.selectedIndividual=individu
     }
     
     editFormation(form: any): void {
@@ -218,6 +247,113 @@ export class FormationComponent
           }
         );
     }
+
+    addInd(form: any): void {
+      // Define the headers with the token
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      const individu = {
+        formation: { id: this.selectedFormation.id },
+        nom:this.newIndividu.nom,
+        prenom:this.newIndividu.prenom,
+        dateNaissance:this.newIndividu.dateNaissance,
+        ville:this.newIndividu.ville,
+        email:this.newIndividu.email,
+        telephone:this.newIndividu.telephone,
+      };
+
+      // Make HTTP POST request to add a new formation
+      this.http.post<any>('http://localhost:8080/individu', individu, { headers: headers })
+        .subscribe(
+          (response) => {
+            // Handle success, if needed
+            console.log('induvidu added successfully. '+response);
+            // Reset the form
+            location.reload();
+
+          },
+          (error: HttpErrorResponse) => {
+            // Handle error, if needed
+            console.error('Error adding individu:', error);
+          }
+        );
+    }
+
+    deleteIndividual(id: number): void {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      });
+    
+      this.http.delete<any[]>(`http://localhost:8080/individu/${id}`, { headers: headers })
+        .subscribe(
+          () => {
+            // Handle success, if needed
+            console.log(`Formation with ID ${id} deleted successfully.`);
+            location.reload();
+          },
+          (error) => {
+            // Handle error, if needed
+            console.error(`Error deleting formation with ID ${id}:`, error);
+          }
+        );
+    }
+
+    editInd(form: any): void {
+      // Define the headers with the token
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      const individu = {
+        formation: { id: this.selectedFormation.id },
+        id:this.selectedIndividual.id,
+        nom:this.selectedIndividual.nom,
+        prenom:this.selectedIndividual.prenom,
+        dateNaissance:this.selectedIndividual.dateNaissance,
+        ville:this.selectedIndividual.ville,
+        email:this.selectedIndividual.email,
+        telephone:this.selectedIndividual.telephone,
+      };
+
+      // Make HTTP POST request to add a new formation
+      this.http.put<any>('http://localhost:8080/individu', individu, { headers: headers })
+        .subscribe(
+          (response) => {
+            // Handle success, if needed
+            console.log('induvidu edited successfully. '+response);
+            // Reset the form
+            location.reload();
+
+          },
+          (error: HttpErrorResponse) => {
+            // Handle error, if needed
+            console.error('Error editing individu:', error);
+          }
+        );
+    }
+
+    toggleSelection(individu: any): void {
+      const index = this.selectedIndividuals.findIndex((i) => i.id === individu.id);
+      if (index !== -1) {
+        this.selectedIndividuals.splice(index, 1); // Deselect if already selected
+      } else {
+        this.selectedIndividuals.push(individu); // Select if not already selected
+      }
+    }
+  
+    isSelected(individu: any): boolean {
+      return this.selectedIndividuals.some((i) => i.id === individu.id);
+    }
+  
+    getSelectedIndividuals(): void {
+      
+    }
+
+    
+
+ 
 
     SchedulFormation(ScheduleForm:any):void
     {
@@ -254,6 +390,7 @@ export class FormationComponent
                 (response) => {
                   // Handle successful response
                   console.log('dates created successfully:', response);
+                  location.reload();
                   // Optionally, close the modal or perform other actions
                 },
                 (error) => {
@@ -272,6 +409,85 @@ export class FormationComponent
       );
     }
 
+    SchedulFormationInd(ScheduleForm:any):void
+    {
+      const planification = {
+        ville: this.ville,
+        formation: { id: this.selectedFormation.id },
+        formateur: { id: this.selectedformateur }
+      };
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}` // Include the token in the 'Authorization' header
+      });
+
+      console.log("formatuer id et entroprise id "+this.selectedFormation.id,this.selectedformateur,this.selectedentreprise,this.ville)
+
+      this.http.post<any>('http://localhost:8080/planification', planification, { headers: headers })
+      .subscribe(
+        (response) => {
+          // Handle successful response
+          console.log('Planification created successfully:', response);
+          this.planificationId=response.id;
+
+          this.selectedDates.forEach(dateObj => {
+            const datePipe = new DatePipe('en-US');
+            const formattedDate = datePipe.transform(dateObj, 'yyyy-MM-dd');
+
+            const selectedIndividualIds: number[] = this.selectedIndividuals.map(individual => individual.id);
+
+            this.http.put<any>(`http://localhost:8080/planification/${this.planificationId}/individuals`, selectedIndividualIds, { headers: headers })
+              .subscribe(
+                (response) => {
+                  // Handle successful response
+                  console.log('dates created successfully:', response);
+                  location.reload();
+                  // Optionally, close the modal or perform other actions
+                },
+                (error) => {
+                  // Handle error
+                  console.error('Error creating dates:', error);
+                  // Optionally, display an error message to the user
+                }
+              );
+
+            const payload = {
+              date: formattedDate, 
+              planification: {id:this.planificationId}
+            };
+    
+            this.http.post<any>('http://localhost:8080/date', payload, { headers: headers })
+              .subscribe(
+                (response) => {
+                  // Handle successful response
+                  console.log('dates created successfully:', response);
+                  location.reload();
+
+                  // Optionally, close the modal or perform other actions
+                },
+                (error) => {
+                  // Handle error
+                  console.error('Error creating dates:', error);
+                  // Optionally, display an error message to the user
+                }
+              );
+          });
+        },
+        (error) => {
+          // Handle error
+          console.error('Error creating planification:', error);
+          // Optionally, display an error message to the user
+        }
+      );
+   
+      
+      
+ 
+
+
+
+    }
+
     addEvent(event: MatDatepickerInputEvent<Date>): void {
       if (event.value !== null) {
         this.selectedDates.push(event.value);
@@ -282,15 +498,12 @@ export class FormationComponent
       this.selectedDates = this.selectedDates.filter(d => d !== date);
     }
   
-    planFormation(id: number): void {
-      // Implement the logic to plan the formation with the specified ID
-      // This could involve routing to a planification component and passing the formation ID
-    }
   
     seePlanifications(id: number): void {
       // Implement the logic to see the planifications for the formation with the specified ID
       // This could involve routing to a planifications component and passing the formation ID
     }
+
 
 
   

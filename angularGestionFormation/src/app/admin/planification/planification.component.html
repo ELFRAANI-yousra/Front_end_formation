@@ -1,0 +1,339 @@
+<h1>planifications for Entropises</h1>
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>City</th>
+            <th>formation</th>
+            <th>formateur</th>
+            <th>entreprise</th>   
+            <th>Actions</th>   
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let formation of planification">
+            <tr *ngIf="formation.entreprise !== null">
+            <td>{{ formation.id }}</td>
+            <td>{{ formation.ville }}</td>
+            <td>{{ formation.formation.id }}</td>
+            <td>{{ formation.formateur.id }}</td>
+            <td>{{ formation.entreprise.id }}</td> 
+            <td>
+              <button class="btn btn-danger" (click)="deletePlanification(formation.id)">Delete</button>
+              <button class="btn btn-primary" (click)="selectFormationForEdit(formation);open(edit)">Edit</button>
+              <button class="btn btn-info" (click)="selectFormationForEdit(formation);open(DatesContent)">Dates</button>
+            </td>
+          </tr>
+        </ng-container>
+       </tbody>
+    </table>
+</div>
+<h1>planifications for individuals</h1>
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>City</th>
+            <th>formation</th>
+            <th>formateur</th> 
+            <th>Actions</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let formation of planification">
+            <tr *ngIf="formation.entreprise == null">
+            <td>{{ formation.id }}</td>
+            <td>{{ formation.ville }}</td>
+            <td>{{ formation.formation.id }}</td>
+            <td>{{ formation.formateur.id }}</td>
+            <td>
+              <button class="btn btn-danger" (click)="deletePlanification(formation.id)">Delete</button>
+              <button class="btn btn-primary" (click)="selectFormationForEdit(formation);open(editInd)">Edit</button>
+              <button class="btn btn-info" (click)="selectFormationForEdit(formation);open(DatesContent)">Dates</button>
+              <button class="btn btn-info" (click)="selectFormationForEdit(formation);openXl(IndividuContent)">individus</button>
+            </td>
+          </tr>
+        </ng-container>
+       </tbody>
+    </table>
+</div>
+
+
+<ng-template #edit let-modal>
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="editFormationModalLabel">Edit planification</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form for editing an existing formation -->
+        <form #ScheduleForm="ngForm" (ngSubmit)="editPlanification(ScheduleForm)">
+            <!-- Hidden input for formation ID -->
+            <input type="hidden" id="editFormationId" name="id" [(ngModel)]="selectedPlanification.id">
+            <!-- Form fields -->
+            <div class="form-group">
+              <label for="formateur">Former</label>
+              <mat-form-field appearance="fill">
+                <mat-label>Former</mat-label>
+                <mat-select [(value)]="selectedPlanification.formateur.id">
+                  <mat-option *ngFor="let formateur of formateurs" [value]="formateur.id" >{{formateur.nom}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <label for="entreprises">entreprises</label>
+              <mat-form-field appearance="fill">
+                <mat-label>entreprises</mat-label>
+                <mat-select [(value)]="selectedPlanification.entreprise.id">
+                  <mat-option *ngFor="let entreprise of entreprises" [value]="entreprise.id"  >{{entreprise.nom}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <label for="ville">City</label>
+              <input type="text" class="form-control" id="ville" name="ville" [(ngModel)]="selectedPlanification.ville" required>
+          </div>
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div></ng-template>
+
+    <ng-template #editInd let-modal>
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editFormationModalLabel">Edit planification</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Form for editing an existing formation -->
+            <form #ScheduleForm="ngForm" (ngSubmit)="editPlanificationInd(ScheduleForm)">
+                <!-- Hidden input for formation ID -->
+                <input type="hidden" id="editFormationId" name="id" [(ngModel)]="selectedPlanification.id">
+                <!-- Form fields -->
+                <div class="form-group">
+                  <label for="formateur">Former</label>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Former</mat-label>
+                    <mat-select [(value)]="selectedPlanification.formateur.id">
+                      <mat-option *ngFor="let formateur of formateurs" [value]="formateur.id" >{{formateur.nom}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <label for="ville">City</label>
+                  <input type="text" class="form-control" id="ville" name="ville" [(ngModel)]="selectedPlanification.ville" required>
+              </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div></ng-template>
+
+    <ng-template #IndividuContent let-modal>
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editFormationModalLabel">Individuals List</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body" >
+            <!-- Form for editing an existing formation -->
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>date of birth</th>
+                    <th>City</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Iterate over the list of individuals and display their information -->
+                  <tr *ngFor="let individu of selectedPlanification.individus">
+                    <td>{{ individu.id }}</td>
+                    <td>{{ individu.nom }} {{individu.prenom}}</td>
+                    <td>{{individu.dateNaissance}}</td>
+                    <td>{{ individu.ville }}</td>
+                    <td>{{ individu.telephone }}</td>
+                    <td>{{ individu.email }}</td>
+                    <td>
+                    <button class="btn btn-primary" (click)="selectIndividual(individu);open(EditIndividuContent)">Edit</button>
+                      <button class="btn btn-danger" (click)="deleteIndividual(individu.id)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- Add button to add a new individual -->
+              <button class="btn btn-success" (click)="open(addIndividuContent)">Add New</button>
+            </div>
+            
+        </div>
+        </div>
+      </ng-template>
+
+    <ng-template #addIndividuContent let-modal>
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addIndividuContent">Add new individuals to this planification</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body" >
+            <form #addIndividu="ngForm" (ngSubmit)="addInd(addIndividu)">
+              <!-- Hidden input for formation ID -->
+              <input type="hidden" id="editFormationId" name="id" [(ngModel)]="selectedFormation.id">
+              <!-- Form fields -->
+              <div class="form-group">
+                  <label for="nom">nom</label>
+                  <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="newIndividu.nom" required>
+              </div>
+              <div class="form-group">
+                  <label for="prenom">prenom</label>
+                  <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="newIndividu.prenom" required>
+              </div>
+              <div class="form-group">
+                  <label for="dateNaissance">dateNaissance</label>
+                  <input type="date" class="form-control" id="dateNaissance" name="dateNaissance" [(ngModel)]="newIndividu.dateNaissance" required>
+              </div>
+              <div class="form-group">
+                  <label for="ville">ville</label>
+                  <input type="text" class="form-control" id="ville" name="cout" [(ngModel)]="newIndividu.ville" required>
+              </div>
+              <div class="form-group">
+                  <label for="email">email</label>
+                  <input type="text" class="form-control" id="email" name="email" [(ngModel)]="newIndividu.email" required>
+              </div>
+               <div class="form-group">
+                <label for="telephone">telephone</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" [(ngModel)]="newIndividu.telephone" required>
+               </div>
+      
+             
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+          </div>
+      </div>
+      </ng-template>
+
+
+      <ng-template #EditIndividuContent let-modal>
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addIndividuContent">Add new individuals to this formation</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body" >
+            <form #addIndividu="ngForm" (ngSubmit)="editIndividu(addIndividu)">
+              <!-- Hidden input for formation ID -->
+              <input type="hidden" id="editFormationId" name="id" [(ngModel)]="selectedPlanification.id">
+              <input type="hidden" id="id" name="id" [(ngModel)]="selectedIndividual.id">
+              <!-- Form fields -->
+              <div class="form-group">
+                  <label for="nom">nom</label>
+                  <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="selectedIndividual.nom" required>
+              </div>
+              <div class="form-group">
+                  <label for="prenom">prenom</label>
+                  <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="selectedIndividual.prenom" required>
+              </div>
+              <div class="form-group">
+                  <label for="dateNaissance">dateNaissance</label>
+                  <input type="date" class="form-control" id="dateNaissance" name="dateNaissance" [(ngModel)]="selectedIndividual.dateNaissance" required>
+              </div>
+              <div class="form-group">
+                  <label for="ville">ville</label>
+                  <input type="text" class="form-control" id="ville" name="cout" [(ngModel)]="selectedIndividual.ville" required>
+              </div>
+              <div class="form-group">
+                  <label for="email">email</label>
+                  <input type="text" class="form-control" id="email" name="email" [(ngModel)]="selectedIndividual.email" required>
+              </div>
+               <div class="form-group">
+                <label for="telephone">telephone</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" [(ngModel)]="selectedIndividual.telephone" required>
+               </div>
+                  
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+          </div>
+      </div>
+      </ng-template>
+
+      <ng-template #DatesContent let-modal>
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editFormationModalLabel">Dates List</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body" >
+            <!-- Form for editing an existing formation -->
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Iterate over the list of individuals and display their information -->
+                  <tr *ngFor="let individu of selectedPlanification.dates">
+                    <td>{{ individu.id }}</td>
+                    <td>{{ individu.date }} {{individu.prenom}}</td>
+                    <td>
+                      <button class="btn btn-danger" (click)="deleteDate(individu.id)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- Add button to add a new individual -->
+              <button class="btn btn-success" (click)="open(addDateContent)">Add New</button>
+            </div>
+            
+        </div>
+        </div>
+      </ng-template>
+
+      <ng-template #addDateContent let-modal>
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addIndividuContent">Add new individuals to this planification</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body" >
+            <form #addIndividu="ngForm" (ngSubmit)="adddate(addIndividu)">
+              <!-- Hidden input for formation ID -->
+              <input type="hidden" id="editFormationId" name="id" [(ngModel)]="selectedFormation.id">
+              <!-- Form fields -->
+
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="addEvent($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              
+              <div *ngIf="selectedDates.length > 0">
+                <h4>Selected Dates:</h4>
+                <ul>
+                  <li *ngFor="let date of selectedDates">
+                    {{ date | date }}
+                    <button mat-button color="warn" (click)="removeDate(date)">Remove</button>
+                  </li>
+                </ul>
+              </div>
+              
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+          </div>
+      </div>
+      </ng-template>
+

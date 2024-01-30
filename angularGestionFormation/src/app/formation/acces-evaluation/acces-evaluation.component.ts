@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder,FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { EvaluationServiceService } from './evaluation-service.service';
 import { Router } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-acces-evaluation',
   templateUrl: './acces-evaluation.component.html',
-  styleUrls: ['./acces-evaluation.component.css']
+  styleUrls: ['./acces-evaluation.component.css'],
 })
 export class AccesEvaluationComponent {
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private evaluationServiceService: EvaluationServiceService) { }
