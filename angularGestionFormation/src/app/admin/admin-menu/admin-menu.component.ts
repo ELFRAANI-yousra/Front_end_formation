@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-admin-menu',
@@ -21,6 +24,7 @@ export class AdminMenuComponent {
       });
   }
 
+
   setActiveMenuItem(menuItem: string) {
     this.activeMenuItem = menuItem;
   }
@@ -40,5 +44,8 @@ export class AdminMenuComponent {
       this.activeMenuItem = '';
     }
   }
-
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']); 
+  }
 }
