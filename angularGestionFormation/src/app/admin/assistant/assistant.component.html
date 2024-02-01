@@ -124,11 +124,11 @@
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
-            <!-- Form for editing an existing formation -->
+
             <form #editAssistantForm="ngForm" (ngSubmit)="editAssistant(editAssistantForm)">
-                <!-- Hidden input for formation ID -->
+             
                 <input type="hidden" id="editAssistantId" name="id" [(ngModel)]="selectedAssistant.id">
-                <!-- Form fields -->
+             
                 <div class="form-group">
                     <label for="nom">Nom</label>
                     <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="selectedAssistant.nom" required>

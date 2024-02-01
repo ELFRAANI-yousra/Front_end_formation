@@ -78,36 +78,36 @@ export class AssistantComponent {
       );
   }
   addAssistant(form: any): void {
-    // Define the headers with the token
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     });
 
-    // Make HTTP POST request to add a new formation
+
     this.http.post<any>(this.Url, this.newAssistant, { headers: headers })
       .subscribe(
         () => {
-          // Handle success, if needed
+      
           console.log('fourmateur added successfully.');
-          // Reset the form
+  
           form.resetForm();
           location.reload();
 
         },
         (error: HttpErrorResponse) => {
-          // Handle error, if needed
+      
           console.error('Error adding fourmateur:', error);
         }
       );
   }
 
   editAssistant(form: any): void {
-    // Define the headers with the token
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     });
     console.log(this.selectedAssistant)
-    // Make HTTP POST request to add a new formation
+ 
    const editAssistant={
     id: this.selectedAssistant.id,
     nom:this.selectedAssistant.nom,

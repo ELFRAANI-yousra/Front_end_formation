@@ -8,6 +8,10 @@
     <div class="collapse navbar-collapse mr-20" id="navbarColor02">
     </div>
   </div>
+  <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+  <mat-menu #menu="matMenu">
+   <button mat-menu-item (click)="logout()">Logout  <mat-icon>logout</mat-icon>  </button>    
+ </mat-menu>
 </nav>
 <br><br>
 <div class="container mt-5">

@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-formateur',
@@ -11,7 +12,7 @@ export class FormateurComponent implements OnInit {
   private Url = 'http://localhost:8080/mesFormation';
   private token: string = ""; // Add a property to store the token
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router,private http: HttpClient) { }
 
   ngOnInit(): void {
     // Fetch the token from local storage when the component initializes
@@ -59,5 +60,10 @@ export class FormateurComponent implements OnInit {
       'Authorization': `Bearer ${this.token}`
     });
     return this.http.get<any[]>(`http://localhost:8080/date/${formationId}`, { headers: headers });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']); 
   }
 }

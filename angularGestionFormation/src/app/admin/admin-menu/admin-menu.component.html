@@ -27,14 +27,13 @@
         <li class="nav-item" (click)="setActiveMenuItem('entreprise')">
           <a class="nav-link" [class.active]="activeMenuItem === 'entreprise'" href="/entreprise">Entreprise</a>
         </li>
-        <li class="nav-item" (click)="setActiveMenuItem('FourmateurExterne')">
-          <a class="nav-link" [class.active]="activeMenuItem === 'FourmateurExterne'" href="/admin/evaluation">Evaluation</a>
+        <li class="nav-item" (click)="setActiveMenuItem('evaluation')">
+          <a class="nav-link" [class.active]="activeMenuItem === 'evaluation'" href="/admin/evaluation">Evaluation</a>
         </li>
       </ul>
       <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
        <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">Logout  <mat-icon>logout</mat-icon>  </button>
-        
+        <button mat-menu-item (click)="logout()">Logout  <mat-icon>logout</mat-icon>  </button>    
       </mat-menu>
 
     </div>

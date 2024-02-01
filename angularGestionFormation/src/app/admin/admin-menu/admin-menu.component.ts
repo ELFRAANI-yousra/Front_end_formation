@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
 
 
 @Component({
@@ -32,18 +30,25 @@ export class AdminMenuComponent {
   private getActiveRoute(): void {
     const currentRoute = this.router.url;
 
-    if (currentRoute === '/') {
-      this.activeMenuItem = 'Home';
-    } else if (currentRoute === '/about') {
-      this.activeMenuItem = 'About';
-    } else if (currentRoute === '/FourmateurExterne') {
-      this.activeMenuItem = 'Postuler';
-    } else if (currentRoute === '/access/evaluation') {
-      this.activeMenuItem = 'Evaluation';
-    } else {
+    if (currentRoute === '/admin/formation') {
+      this.activeMenuItem = 'formation';
+    } else if (currentRoute === '/planification') {
+      this.activeMenuItem = 'planification';
+    } else if (currentRoute === '/assistant') {
+      this.activeMenuItem = 'assistant';
+    } else if (currentRoute === '/admin/formateur') {
+      this.activeMenuItem = 'fourmateur';
+    } else if (currentRoute === '/admin/formateurExterne') {
+      this.activeMenuItem = 'formateurExterne';
+    } else if (currentRoute === '/entreprise') {
+      this.activeMenuItem = 'entreprise';
+    } else if (currentRoute === '/admin/evaluation') {
+      this.activeMenuItem = 'evaluation';
+    }else {
       this.activeMenuItem = '';
     }
   }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']); 
