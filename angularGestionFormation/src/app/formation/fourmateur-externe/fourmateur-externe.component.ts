@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./fourmateur-externe.component.css']
 })
 
-
 export class FourmateurExterneComponent {
   form: any;
 

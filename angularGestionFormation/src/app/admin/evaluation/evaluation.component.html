@@ -1,3 +1,6 @@
+<div>
+  <app-admin-menu></app-admin-menu>
+</div><br><br>
 <div class="container mt-5">
     <table class="table">
       <thead>
@@ -13,6 +16,7 @@
           <th>Note Rythme</th>
           <th>Note Support Cours TP </th>
           <th>Note Maitrise Sujet </th>
+          <th>Supprimer</th>
         </tr>
       </thead>
       <tbody>
@@ -30,10 +34,18 @@
           <td>{{ evaluation.noteMaitriseSujet }}</td>
   
           <td>
-            <button class="btn btn-danger" (click)="deleteEvaluation(evaluation.id)">Delete</button>
+            
+
+            <button class="btn btn-danger" mat-mini-fab  color="warn" (click)="deleteEvaluation(evaluation.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  
+
+
+
   

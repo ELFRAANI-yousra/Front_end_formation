@@ -39,6 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormateurExterneComponent } from './admin/formateur-externe/formateur-externe.component';
 import{EvaluationComponent as EvaluationComponentAdmin}from'./admin/evaluation/evaluation.component'
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import{EvaluationComponent as EvaluationComponentAdmin}from'./admin/evaluation/e
     FormateurExterneComponent
   ],
   imports: [
+    MatMenuModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
