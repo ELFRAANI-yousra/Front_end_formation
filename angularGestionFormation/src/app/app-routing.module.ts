@@ -14,9 +14,10 @@ import{AccesEvaluationComponent}from './formation/acces-evaluation/acces-evaluat
 import{PlanificationComponent}from './admin/planification/planification.component'
 import{FormationComponent as FormationComponentAdmin}from './admin/formation/formation.component'
 import{FourmateurComponent}from './admin/fourmateur/fourmateur.component'
+import{FormateurExterneComponent}from './admin/formateur-externe/formateur-externe.component'
 import{AssistantComponent}from './admin/assistant/assistant.component'
 import{MenuAdminComponent}from './admin/menu-admin/menu-admin.component'
-
+import{EvaluationComponent as EvaluationComponentAdmin}from'./admin/evaluation/evaluation.component'
 const routes: Routes = [
 {path: 'formation-detaille', component: FormationDetailleComponent},
 {path: 'individu', component: IndividuInscreptionComponent},
@@ -29,11 +30,14 @@ const routes: Routes = [
 {path: 'login', component: LoginComponent},
 {path: 'formateur', component: FormateurComponent},
 {path: 'admin/formation', component: FormationComponentAdmin},
+{path: 'admin/formateurExterne', component: FormateurExterneComponent},
 {path: 'test', component: AddmodalComponent},
 {path: 'planification', component: PlanificationComponent},
 {path: 'evaluation', component: EvaluationComponent},
 {path: 'entreprise', component: EntrepriseComponent},
 {path: 'access/evaluation', component: AccesEvaluationComponent},
+{path:'admin/evaluation', component:EvaluationComponentAdmin},
+
 ];
 
 @NgModule({

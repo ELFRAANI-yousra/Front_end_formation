@@ -32,7 +32,8 @@ import { EntrepriseComponent } from './admin/entreprise/entreprise.component';
 import { FourmateurComponent } from './admin/fourmateur/fourmateur.component';
 import { AssistantComponent } from './admin/assistant/assistant.component';
 import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
-
+import { FormateurExterneComponent } from './admin/formateur-externe/formateur-externe.component';
+import{EvaluationComponent as EvaluationComponentAdmin}from'./admin/evaluation/evaluation.component'
 
 @NgModule({
   declarations: [
@@ -51,13 +52,14 @@ import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
     AddmodalComponent,
     AccesEvaluationComponent,
     EvaluationComponent,
-
+    EvaluationComponentAdmin,
     PlanificationComponent,
 
     EntrepriseComponent,
     FourmateurComponent,
     AssistantComponent,
-    MenuAdminComponent
+    MenuAdminComponent,
+    FormateurExterneComponent
   
 
   ],
