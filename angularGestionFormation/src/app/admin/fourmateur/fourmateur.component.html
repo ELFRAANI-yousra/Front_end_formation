@@ -1,5 +1,9 @@
+<div>
+  <app-admin-menu></app-admin-menu>
+</div>
+<br><br>
 <div class="container mt-5">
-    <button class="btn btn-primary float-right mb-3" (click)="open(content)">Add Formateur</button>
+    <button  class="btn btn-primary " mat-mini-fab color="primary" (click)="open(content)"> <mat-icon>add</mat-icon></button>
     <table class="table">
       <thead>
         <tr>
@@ -10,6 +14,7 @@
           <th>Mots de pass</th>
           <th>Mots Cles</th>
           <th>Remarques</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -23,10 +28,12 @@
           <td>{{ fourmateur.remarques }}</td>
   
           <td>
-            <button class="btn btn-danger" (click)="deleteFourmateur(fourmateur.id)">Delete</button>
-            
-            <button class="btn btn-primary" (click)="selectFourmateurForEdit(fourmateur); open(editContent)">Edit</button>
-           
+            <button class="btn btn-danger" mat-mini-fab  color="warn" (click)="deleteFourmateur(fourmateur.id)">
+              <mat-icon>delete</mat-icon>
+            </button>          
+            <button class="btn btn-primary" mat-mini-fab  color="primary" (click)="selectFourmateurForEdit(fourmateur); open(editContent)">
+              <mat-icon>edit</mat-icon> 
+            </button>
           </td>
         </tr>
       </tbody>
@@ -35,7 +42,7 @@
   <ng-template #content let-modal>
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addFourmateurModalLabel">Add Formateur</h5>
+        <h2 class="modal-title" id="addFourmateurModalLabel">ajouter Formateur</h2>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         </button>
       </div>
@@ -52,23 +59,23 @@
             <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="newFourmateur.prenom" required>
           </div>
           <div class="form-group">
-            <label for="email">email</label>
+            <label for="email">Email</label>
             <input type="text" class="form-control" id="email" name="email" [(ngModel)]="newFourmateur.email" required>
           </div>
           <div class="form-group">
-            <label for="motsDePasse">motsDePasse</label>
+            <label for="motsDePasse">Mots de passe</label>
             <input type="text" class="form-control" id="motsDePasse" name="motsDePasse" [(ngModel)]="newFourmateur.motDePasse" required>
           </div>
           <div class="form-group">
-            <label for="motsCles">motsCles</label>
+            <label for="motsCles">MotsCles</label>
             <textarea class="form-control" id="motsCles" name="motsCles" [(ngModel)]="newFourmateur.motsCles" required></textarea>
           </div>
           <div class="form-group">
-            <label for="remarques">remarques</label>
+            <label for="remarques">Remarques</label>
             <textarea class="form-control" id="remarques" name="remarques" [(ngModel)]="newFourmateur.remarques" required></textarea>
           </div>
-          
-          <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Add</button>
+          <br>
+          <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">ajouter</button>
         </form>
       </div>
     </div>
@@ -79,15 +86,12 @@
 <ng-template #editContent let-modal>
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="editFourmateurModalLabel">Edit Formateur</h5>
+            <h2 class="modal-title" id="editFourmateurModalLabel">Modifier Formateur</h2>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
-            <!-- Form for editing an existing formation -->
             <form #editFourmateurForm="ngForm" (ngSubmit)="editFourmateur(editFourmateurForm)">
-                <!-- Hidden input for formation ID -->
                 <input type="hidden" id="editFourmateurId" name="id" [(ngModel)]="selectedFourmateur.id">
-                <!-- Form fields -->
                 <div class="form-group">
                     <label for="editNon">Nom</label>
                     <input type="text" class="form-control" id="editNom" name="nom" [(ngModel)]="selectedFourmateur.nom" required>
@@ -97,23 +101,23 @@
                     <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="selectedFourmateur.prenom" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">email</label>
+                    <label for="email">Email</label>
                     <input type="text" class="form-control" id="email" name="email" [(ngModel)]="selectedFourmateur.email" required>
                 </div>
                 <div class="form-group">
-                    <label for="motsDePasse">motsDePasse</label>
+                    <label for="motsDePasse">Mots de passe</label>
                     <input type="text" class="form-control" id="motsDePasse" name="motsDePasse" [(ngModel)]="selectedFourmateur.motDePasse" required>
                 </div>
                 <div class="form-group">
-                    <label for="motsCles">motsCles</label>
+                    <label for="motsCles">MotsCles</label>
                     <textarea class="form-control" id="motsCles" name="motsCles" [(ngModel)]="selectedFourmateur.motsCles" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="remarques">remarques</label>
+                    <label for="remarques">Remarques</label>
                     <textarea class="form-control" id="remarques" name="remarques" [(ngModel)]="selectedFourmateur.remarques" required></textarea>
                 </div>
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary">Save</button>
+                <br>
+                <button type="submit" class="btn btn-primary">Sauvegarder</button>
             </form>
         </div>
     </div>

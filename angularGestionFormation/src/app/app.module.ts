@@ -32,7 +32,11 @@ import { EntrepriseComponent } from './admin/entreprise/entreprise.component';
 import { FourmateurComponent } from './admin/fourmateur/fourmateur.component';
 import { AssistantComponent } from './admin/assistant/assistant.component';
 import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
-
+import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
+import { MatTableModule } from '@angular/material/table'; 
+import { MatSortModule } from '@angular/material/sort'; 
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -57,7 +61,8 @@ import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
     EntrepriseComponent,
     FourmateurComponent,
     AssistantComponent,
-    MenuAdminComponent
+    MenuAdminComponent,
+    AdminMenuComponent
   
 
   ],
@@ -78,8 +83,10 @@ import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
     MatNativeDateModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    
-     
+    MatTableModule,
+    MatSortModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

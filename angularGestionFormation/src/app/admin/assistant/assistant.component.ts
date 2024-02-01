@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, inject, TemplateRef } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { DatePipe } from '@angular/common';
+
+
 @Component({
   selector: 'app-assistant',
   templateUrl: './assistant.component.html',
@@ -28,6 +28,8 @@ export class AssistantComponent {
 
 
   };
+
+  columnsToDisplay: string[] = ['id', 'nom', 'prenom', 'email', 'motDePasse', 'adresse', 'telephone', 'actions'];
 
 
 

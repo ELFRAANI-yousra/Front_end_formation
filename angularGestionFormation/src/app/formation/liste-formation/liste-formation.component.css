@@ -2,9 +2,8 @@
     display: block;
     width: 80%;
     float: left;
-    padding: 10px; /* Add padding as needed */
+    padding: 10px; 
   }
-  /* styles.css */
 .card {
   background-color: rgb(245, 245, 245);
   padding-left: 5%;

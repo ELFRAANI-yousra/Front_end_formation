@@ -25,8 +25,6 @@ export class LoginComponent
   
     this.http.post<any>(this.backEndURL, this.formLogin.value).subscribe(
       response  => {
-        // Success callback
-        alert("Your login was successful!"); // Show an alert
         const token = response.token;
         const role=response.role;
         localStorage.setItem('token', token);

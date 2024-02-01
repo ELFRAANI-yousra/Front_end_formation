@@ -1,15 +1,14 @@
+<div>
+    <app-menu></app-menu>
+</div>
 <div *ngIf="individu">
-    <div class="container mt-3">
-        <!-- Rating Cards using Angular -->
-        <div class="row justify-content-center">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center vh-100">
             <div class="jumbotron mt-3"class="col-md-4 mb-4">
                 <h2>Bienvenue {{ individu.nom }} {{ individu.prenom }}</h2>
                 <p >Nous espérons que vous passerez une excellente formation chez nous,</p>
-                <p >Vous pouvez évaluer votre expérience chez nous en remplissant le formulaire ci-dessous</p>
-                
-              </div>
-             
-            <!-- Rating Card for Pedagogical Note -->
+                <p >Vous pouvez évaluer votre expérience chez nous en remplissant le formulaire ci-dessous</p>          
+            </div>
             <div class="col-md-4 mb-4"> 
                 <br>
                 <div class="card">
@@ -45,9 +44,25 @@
                         </div>
 
                         <br>
-                        <button class="btn btn-primary" (click)="captureRatings()">Submit Ratings</button>
+                        <button class="btn btn-primary" (click)="captureRatings(IndividuContent)">Soumettre les évaluations</button>
                     </div>
                 </div>
             </div>
         </div>
 </div>
+
+<ng-template #IndividuContent let-modal>
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="icon-box">
+            <i class="material-icons">&#xE876;</i>
+          </div>				
+          <h4 class="modal-title">Votre évaluation a été soumise avec succès!</h4>	
+        </div>
+         <br><br>
+          <button class="btn btn-success btn-block" (click)="modal.close()">OK</button>
+       
+      </div>
+    </div>
+  </ng-template>

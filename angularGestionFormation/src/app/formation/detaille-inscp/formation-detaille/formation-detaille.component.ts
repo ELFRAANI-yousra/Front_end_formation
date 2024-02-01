@@ -7,26 +7,24 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './formation-detaille.component.html',
   styleUrls: ['./formation-detaille.component.css']
 })
-export class FormationDetailleComponent implements OnInit {
 
-  selectedFormation: any;
-   
+export class FormationDetailleComponent implements OnInit 
+{
+
   constructor(private formationDetailServiceService: FormationDetailServiceService, private fb: FormBuilder) {}
-  myForm=this.fb.group({
-    code: []  
-  });
- onSubmit() {
+  selectedFormation: any;
+  myForm=this.fb.group({code: []  });
+
+ onSubmit() 
+ {
      const aa=this.myForm.get('code');
       console.log('Value submitted:',aa);
-   
   }
-  ngOnInit() {
-    // Retrieve the selected formation from the service
+
+  ngOnInit()
+   {
     this.selectedFormation = this.formationDetailServiceService.getSelectedFormation();
     console.log(this.selectedFormation)
   }
 
- 
-
- 
 }

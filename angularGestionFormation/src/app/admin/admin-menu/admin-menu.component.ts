@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  selector: 'app-admin-menu',
+  templateUrl: './admin-menu.component.html',
+  styleUrls: ['./admin-menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class AdminMenuComponent {
   activeMenuItem: string = '';
 
   constructor(private router: Router) {}
@@ -40,4 +40,5 @@ export class MenuComponent implements OnInit {
       this.activeMenuItem = '';
     }
   }
+
 }

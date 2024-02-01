@@ -2,16 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormationDetailServiceService } from '../liste-formation/formation-detail.service.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-individu-inscreption',
   templateUrl: './individu-inscreption.component.html',
   styleUrls: ['./individu-inscreption.component.css']
 })
-export class IndividuInscreptionComponent {
+
+export class IndividuInscreptionComponent
+{
   selectedFormation: any = null;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private formationDetailServiceService: FormationDetailServiceService) {
+  constructor(private modalService: NgbModal,private fb: FormBuilder, private http: HttpClient, private formationDetailServiceService: FormationDetailServiceService) {
     this.selectedFormation = this.formationDetailServiceService.getSelectedFormation();
   }
 
@@ -27,26 +30,38 @@ export class IndividuInscreptionComponent {
     formation:[]
   });
 
-  addIndividu() {
+  addIndividu(formation:any) 
+  {
     console.log(this.formIndividu.value);
     this.formIndividu.patchValue({formation:this.selectedFormation});
-    
     this.http.post(this.backEndURL, this.formIndividu.value).subscribe(
     () => {
-      // Success callback
-      alert("Votre inscreption a été soumise avec succès!"); // Show an alert
-      this.redirectToHome(); // Redirect to home page
+      this.openSuccessModal(formation);
     },
     error => {
-      // Handle error if needed
       console.error("Error inscreption form:", error);
     }
   );
 }
 
-redirectToHome() {
-  // Redirect to the home page (change the URL as needed)
+redirectToHome() 
+{
   window.location.href = "";
 };
+
+openSuccessModal(formation:any) {
+  const modalRef: NgbModalRef = this.modalService.open(formation, { centered: true });
+  modalRef.result.then(
+    (result) => {
+      console.log('Modal closed:', result);
+      this.redirectToHome();
+    },
+    (reason) => {
+      console.log('Modal dismissed:', reason);
+      this.redirectToHome();
+    }
+  );
+}
+
 }
 

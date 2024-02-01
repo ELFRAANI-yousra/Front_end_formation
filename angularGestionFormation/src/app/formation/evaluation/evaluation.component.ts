@@ -1,22 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+
 import { EvaluationServiceService } from '../acces-evaluation/evaluation-service.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-evaluation',
   templateUrl: './evaluation.component.html',
   styleUrls: ['./evaluation.component.css'],
 })
-export class EvaluationComponent {
-  PedagogicalNote: number = 0;
-  NoteRythme: number = 0;
-  NoteSupport: number = 0;
-  NoteMaitrise: number = 0;
-  individu: any;
 
+export class EvaluationComponent 
+{
   constructor(
+    private modalService: NgbModal,
     private fb: FormBuilder,
     private http: HttpClient,
     private evaluationServiceService: EvaluationServiceService
@@ -24,6 +22,12 @@ export class EvaluationComponent {
   
   backEndURL1 = 'http://localhost:8080/evaluation';
   backEndURL2 = 'http://localhost:8080/rejoindre/evaluer';
+  PedagogicalNote: number = 0;
+  NoteRythme: number = 0;
+  NoteSupport: number = 0;
+  NoteMaitrise: number = 0;
+  individu: any;
+  stars: number[] = [1, 2, 3, 4, 5];
   formEvaluation = this.fb.group({
     notePedagogique: [0],
     noteRythme: [0],
@@ -33,15 +37,11 @@ export class EvaluationComponent {
     individu: [null],
   });
 
-
-  stars: number[] = [1, 2, 3, 4, 5];
-
-  captureRatings() {
-
+  captureRatings(IndividuContent:any) 
+  {
     const id=this.individu.id;
     console.log(id);
     this.http.post(this.backEndURL2,id).subscribe()
-    
     this.formEvaluation.patchValue({ notePedagogique: this.PedagogicalNote });
     this.formEvaluation.patchValue({ noteRythme: this.NoteRythme });
     this.formEvaluation.patchValue({ noteSupportCoursTP: this.NoteSupport });
@@ -53,29 +53,42 @@ export class EvaluationComponent {
     
     this.http.post(this.backEndURL1, this.formEvaluation.value).subscribe(
       () => {
-        // Success callback
-        alert('Votre évaluation a été soumise avec succès!'); // Show an alert
-        this.redirectToHome(); // Redirect to home page
+        this.openSuccessModal(IndividuContent);
       },
       (error) => {
-        // Handle error if needed
         console.error('Error evaluation form:', error);
       }
     );
   }
 
-  ngOnInit(): void {
-    // Subscribe to the route parameters
+  ngOnInit(): void 
+  {
     this.individu = this.evaluationServiceService.getIndividuData();
     console.log('Individu in EvaluationComponent:', this.individu);
   }
 
-  redirectToHome() {
-    // Redirect to the home page (change the URL as needed)
+  redirectToHome()
+  {
     window.location.href = '';
   }
 
-  setRating(rating: number, category: string): void {
+  openSuccessModal(formation:any) 
+  {
+    const modalRef: NgbModalRef = this.modalService.open(formation, { centered: true });
+    modalRef.result.then(
+      (result) => {
+        console.log('Modal closed:', result);
+        this.redirectToHome();
+      },
+      (reason) => {
+        console.log('Modal dismissed:', reason);
+        this.redirectToHome();
+      }
+    );
+  }
+
+  setRating(rating: number, category: string): void 
+  {
     switch (category) {
       case 'PedagogicalNote':
         this.PedagogicalNote = rating;

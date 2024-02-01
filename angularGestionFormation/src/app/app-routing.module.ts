@@ -17,6 +17,7 @@ import{FourmateurComponent}from './admin/fourmateur/fourmateur.component'
 import{AssistantComponent}from './admin/assistant/assistant.component'
 import{MenuAdminComponent}from './admin/menu-admin/menu-admin.component'
 
+
 const routes: Routes = [
 {path: 'formation-detaille', component: FormationDetailleComponent},
 {path: 'individu', component: IndividuInscreptionComponent},

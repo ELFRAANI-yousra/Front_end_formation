@@ -1,3 +1,4 @@
+<div class="card border-primary">
 <div class="container">
   <div class="row">
     <div class="card-body">
@@ -13,13 +14,11 @@
           [checked]="selectedCategories.includes(card)"
         />
         <label class="form-check-label" [for]="card">{{ card }}</label>
-      </div>
-      
+      </div>  
     </div>
   </div>
-</div>
+  </div>
 <br>
-
   <div class="container">
     <div class="row">
           <div class="card-body">
@@ -28,21 +27,18 @@
             <p>moins de {{ coutRangeValue }} MAD</p>
           </div>
         </div>
-      
   </div>
-  <br>
+<br>
   <div class="container">
     <div class="row">
-    
           <div class="card-body">
             <label for="customRange2" class="form-label"style="font-weight: bold;font-size: 20px;">Feltrer par Nombre d'heure</label>
             <input type="range" class="form-range" id="customRange2" min="0" max="50" [(ngModel)]="nombreRangeValue" (input)="onNombreRangeChange($event)">
             <p>moins de {{ nombreRangeValue }} Heurs</p>
           </div>
-        
     </div>
   </div>
-
+</div>
 
   
  
